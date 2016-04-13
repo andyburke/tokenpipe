@@ -1,0 +1,23 @@
+{
+  "name": "tokenpipe",
+  "version": "1.0.0",
+  "description": "A simple, tested implementation of a 'token bucket' algorithm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/**/*.js | tap-spec",
+    "test_debug": "node --debug-brk node_modules/tape/bin/tape test/**/*.js | tap-spec"
+  },
+  "keywords": [
+    "token",
+    "bucket"
+  ],
+  "author": "Andy Burke <aburke@bitflood.org>",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.12.0"
+  },
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
+  }
+}
