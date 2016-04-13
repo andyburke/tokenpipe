@@ -1,6 +1,6 @@
 {
   "name": "tokenpipe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple, tested implementation of a 'token bucket' algorithm.",
   "main": "index.js",
   "scripts": {
