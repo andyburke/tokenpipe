@@ -44,11 +44,12 @@ test( 'BASICS: consuming at too high a rate fails at the expected rate (10 secon
     const TokenPipe = require( '../index.js' );
     const tokenPipe = TokenPipe();
 
-    const start = Date.now();
     const rate = 500;
     const EPISILON = 0.01;
     let executions = 0;
     let failures = 0;
+
+    const start = Date.now();
     (function periodic() {
         const now = Date.now();
         if ( now - start > 1000 * 10 ) {
