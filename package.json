@@ -1,8 +1,12 @@
 {
   "name": "tokenpipe",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple, tested implementation of a 'token bucket' algorithm.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyburke/tokenpipe.git"
+  },
   "scripts": {
     "test": "tape test/**/*.js | tap-spec",
     "test_debug": "node --debug-brk node_modules/tape/bin/tape test/**/*.js | tap-spec"
