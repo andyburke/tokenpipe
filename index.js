@@ -18,7 +18,7 @@ const TokenPipe = {
 
         const timeDelta = now - self._lastConsumed;
         const periodDelta = timeDelta / self.period;
-        const tokens = Math.min( self.count, self.count * periodDelta );
+        const tokens = self.count * periodDelta;
         const available = tokens >= 1;
 
         self._lastConsumed = available ? now : self._lastConsumed;
