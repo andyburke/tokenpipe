@@ -4,11 +4,13 @@ const moment = require( 'moment' );
 
 const TokenPipe = {
     period: 1000,
+    fillRate: 1,
     count: 1,
     _lastConsumed: 0,
 
     consume: function consume() {
         const self = this;
+
         const now = Date.now();
 
         // account for any clock changes underneath us by pretending a time period has passed
@@ -18,10 +20,15 @@ const TokenPipe = {
 
         const timeDelta = now - self._lastConsumed;
         const periodDelta = timeDelta / self.period;
-        const tokens = self.count * periodDelta;
-        const available = tokens >= 1;
+        const filled = parseInt( self.fillRate * periodDelta, 10 );
+        self.count = Math.min( self.fillRate, self.count + filled );
 
-        self._lastConsumed = available ? now : self._lastConsumed;
+        const available = self.count >= 1;
+
+        if ( available ) {
+            self.count--;
+            self._lastConsumed = now;
+        }
 
         return available;
     }
@@ -30,13 +37,12 @@ const TokenPipe = {
 function createTokenPipe( _options ) {
     const options = Object.assign( {
         period: TokenPipe.period,
-        count: TokenPipe.count
+        fillRate: TokenPipe.fillRate
     }, _options );
-
 
     if ( typeof options.rate === 'string' ) {
         const rateValues = options.rate.split( '/' );
-        options.count = parseInt( rateValues[ 0 ], 10 );
+        options.fillRate = parseInt( rateValues[ 0 ], 10 );
         options.period = rateValues[ 1 ];
     }
 
@@ -44,7 +50,8 @@ function createTokenPipe( _options ) {
 
     return Object.assign( {}, TokenPipe, {
         period: period,
-        count: options.count
+        fillRate: options.fillRate,
+        count: typeof options.count === 'number' ? options.count : options.fillRate
     } );
 }
 
